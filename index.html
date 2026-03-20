@@ -60,8 +60,8 @@
           </div>
 
           <div class="is-size-6" style="margin-top: 0.5rem;">
-            <span class="tag is-light">IJCAI 2026</span>
-            <span class="tag is-light">Multi-modal Gait • Missing Modality • Knowledge Distillation</span>
+            <span class="tag is-light">ACM MM 2026</span>
+            <span class="tag is-light">three-lead frontal EEG, self-supervised learning, mental disorder recognition, physiological priors, EEG frequency bands</span>
           </div>
 
           <!-- Links -->
@@ -152,10 +152,8 @@ To more effectively capture both the shared and discriminative representations o
     <h2 class="title is-3 has-text-centered">Contributions</h2>
     <div class="content">
       <div class="columns is-multiline is-centered">
-        <div class="column is-5"><p class="has-text-centered">• <b>MGD dataset</b></p></div>
-        <div class="column is-5"><p class="has-text-centered">• <b>MIF module</b></p></div>
-        <div class="column is-5"><p class="has-text-centered">• <b>Unified inference under arbitrary modalities</b></p></div>
-        <div class="column is-5"><p class="has-text-centered">• <b>Trust-driven hierarchical KD</b></p></div>
+        <div class="column is-5"><p class="has-text-centered">• <b>A large-scale three-lead frontal EEG dataset</b></p></div>
+        <div class="column is-5"><p class="has-text-centered">• <b>A two-stage self-supervised pretraining framework</b></p></div>
       </div>
     </div>
   </div>
@@ -172,45 +170,77 @@ To more effectively capture both the shared and discriminative representations o
     <div class="content">
       <!-- Combined text -->
       <!--h3 class="title is-5">Multi-modal Gait Depression (MGD) Dataset</h3-->
-      <h3 class="title is-4 has-text-centered">Dataset Overview</h3>
-      <p style="text-align: justify; margin-bottom: 2rem;">
+      <p style="text-align: justify;">
         This dataset provides high-quality three-lead frontal EEG (Fp1, Fp2, Fpz) recordings for multi-psychiatric disorder analysis. 
-        It contains recordings from 729 participants and spans diverse clinical settings to ensure robust evaluation.
+        It spans diverse clinical settings to ensure robust evaluation of recognition frameworks.
       </p>
 
-      <div class="columns is-multiline is-centered">
-        
-        <div class="column is-one-third">
-          <figure class="image">
-            <img src="./assets/Sound_Fp1_time_voltage.png" alt="Dataset Example 1" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-          </figure>
-          <p class="has-text-centered is-size-7 has-text-grey" style="margin-top: 0.5rem;">(a) Sound_Fp1_time_voltage</p>
-        </div>
+      <style>
+        .dm-slider-wrap{ position: relative; margin-top: 1.25rem; padding: 0 2.75rem; box-sizing: border-box; }
+        .dm-slider{ display: flex; gap: 1rem; overflow-x: auto; scroll-behavior: smooth; padding: 0.5rem 0; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+        .dm-slider::-webkit-scrollbar{ display:none; }
+        .dm-card{ flex: 0 0 auto; width: 320px; }
+        .dm-figure{ width: 100%; height: 200px; border-radius: 12px; overflow: hidden; background: #ffffff; box-shadow: 0 4px 8px rgba(0,0,0,0.05); }
+        .dm-figure img{ width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }
+        .dm-cap{ margin-top: 0.5rem; font-size: 0.85rem; color: #7a7a7a; text-align: center; }
+        .dm-nav{ position: absolute; top: 50%; transform: translateY(-50%); width: 2.25rem; height: 2.25rem; border-radius: 999px; border: 1px solid rgba(0,0,0,0.12); background: rgba(255,255,255,0.95); cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 2; box-shadow: 0 4px 12px rgba(0,0,0,0.08); user-select: none; }
+        .dm-nav:hover{ background: #ffffff; }
+        .dm-nav.left{ left: 0.25rem; }
+        .dm-nav.right{ right: 0.25rem; }
+        @media (max-width: 768px){ .dm-card{ width: 280px; } .dm-figure{ height: 180px; } .dm-slider{ padding-left: 1rem; padding-right: 1rem; } }
+      </style>
 
-        <div class="column is-one-third">
-          <figure class="image">
-            <img src="./assets/Still_Fp1_time_voltage.png" alt="Dataset Example 2" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-          </figure>
-          <p class="has-text-centered is-size-7 has-text-grey" style="margin-top: 0.5rem;">(b) Still_Fp1_time_voltage</p>
-        </div>
+      <div class="dm-slider-wrap">
+        <button class="dm-nav left" type="button" aria-label="Scroll left" onclick="dmScrollBy('dm-slider-1', -1)">&#8249;</button>
 
-        <div class="column is-one-third">
-          <figure class="image">
-            <img src="./assets/Sound_Fp1_spectrogram.png" alt="Dataset Example 3" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-          </figure>
-          <p class="has-text-centered is-size-7 has-text-grey" style="margin-top: 0.5rem;">(c) Sound_Fp1_spectrogram</p>
-        </div>
+        <div class="dm-slider" id="dm-slider-1">
+          
+          <div class="dm-card">
+            <div class="dm-figure">
+              <img src="./assets/插图5_01.png" alt="EEG Setup">
+            </div>
+            <div class="dm-cap">(a) Dataset Collection Paradigm</div>
+          </div>
 
-        <div class="column is-one-third">
-          <figure class="image">
-            <img src="./assets/fig4.png" alt="Dataset Example 6" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-          </figure>
-          <p class="has-text-centered is-size-7 has-text-grey" style="margin-top: 0.5rem;">(d) The power spectral density of one of the electrodes</p>
-        </div>
+          <div class="dm-card">
+            <div class="dm-figure">
+              <img src="./assets/Still_Fp1_time_voltage.png" alt="Raw Signals">
+            </div>
+            <div class="dm-cap">(b) Time-voltage graph of the resting-state Fp1 electrode</div>
+          </div>
 
+          <div class="dm-card">
+            <div class="dm-figure">
+              <img src="./assets/Sound_Fp1_time_voltage.png" alt="Framework">
+            </div>
+            <div class="dm-cap">(c) Time-voltage graph of the Fp1 electrode in the stimulated state</div>
+          </div>
+
+          <div class="dm-card">
+            <div class="dm-figure">
+              <img src="./assets/fig4.png" alt="Results">
+            </div>
+            <div class="dm-cap">(d) The power spectral density of one of the electrodes</div>
+          </div>
+
+          </div>
+
+        <button class="dm-nav right" type="button" aria-label="Scroll right" onclick="dmScrollBy('dm-slider-1', 1)">&#8250;</button>
       </div>
 
+      <p class="is-size-7 has-text-grey" style="margin-top:0.75rem;">
+        (a) Dataset Collection Paradigm. (b) Time-voltage graph of the resting-state Fp1 electrode. (c) Time-voltage graph of the Fp1 electrode in the stimulated state. (d) The power spectral density of one of the electrodes.
+      </p>
 
+      <script>
+        function dmScrollBy(sliderId, direction){
+          const el = document.getElementById(sliderId);
+          if(!el) return;
+          const card = el.querySelector('.dm-card');
+          const step = card ? (card.offsetWidth + 16) : 340;
+          el.scrollBy({ left: direction * step, behavior: 'smooth' });
+        }
+      </script>
       <!-- Slider styles (scoped) -->
       <style>
         /* Slider container */
