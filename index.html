@@ -100,7 +100,7 @@
           <!-- Teaser -->
           <div class="teaser-img" style="margin-top: 1.25rem;">
             <div class="columns is-mobile is-centered is-vcentered">
-              <div class="column is-half" style="padding: 0.5rem;>
+              <div class="column is-half" style="padding: 0.5rem;">
                 <img src="./assets/插图2_02.png" alt="Figure 2" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
               </div>
               <div class="column is-half" style="padding: 0.5rem;">
@@ -197,9 +197,9 @@ To more effectively capture both the shared and discriminative representations o
           
           <div class="dm-card">
             <div class="dm-figure">
-              <img src="./assets/插图5_01.png" alt="EEG Setup">
+              <img src="./assets/Sound_Fp1_spectrogram.png" alt="EEG Setup">
             </div>
-            <div class="dm-cap">(a) Dataset Collection Paradigm</div>
+            <div class="dm-cap">(a) Time-frequency map of the Fp1 electrode</div>
           </div>
 
           <div class="dm-card">
@@ -229,7 +229,7 @@ To more effectively capture both the shared and discriminative representations o
       </div>
 
       <p class="is-size-7 has-text-grey" style="margin-top:0.75rem;">
-        (a) Dataset Collection Paradigm. (b) Time-voltage graph of the resting-state Fp1 electrode. (c) Time-voltage graph of the Fp1 electrode in the stimulated state. (d) The power spectral density of one of the electrodes.
+        (a) Time-frequency map of the Fp1 electrode. (b) Time-voltage graph of the resting-state Fp1 electrode. (c) Time-voltage graph of the Fp1 electrode in the stimulated state. (d) The power spectral density of one of the electrodes.
       </p>
 
       <script>
@@ -315,80 +315,6 @@ To more effectively capture both the shared and discriminative representations o
           .dm-slider{ padding-left: 2.5rem; padding-right: 2.5rem; }
         }
       </style>
-
-      <!-- Slider UI -->
-      <div class="dm-slider-wrap">
-        <button class="dm-nav left" type="button" aria-label="Scroll left"
-                onclick="dmScrollBy('dm-slider-1', -1)">
-          &#8249;
-        </button>
-
-        <div class="dm-slider" id="dm-slider-1">
-          <!-- Dataset images -->
-          <div class="dm-card">
-            <div class="dm-figure">
-              <img src="./assets/gait_collection_blue_facing_yellow_1.png" alt="Dataset setup (placeholder)">
-            </div>
-            <div class="dm-cap">(a) Data acquisition setup</div>
-          </div>
-
-          <div class="dm-card">
-            <div class="dm-figure">
-              <img src="./assets/alldata_01.png" alt="Modality examples (placeholder)">
-            </div>
-            <div class="dm-cap">(b) RGB / IR / depth / Skeleton examples</div>
-          </div>
-
-          <!-- Method images -->
-          <div class="dm-card">
-            <div class="dm-figure">
-              <img src="./assets/Overview_01.png" alt="Overall framework (placeholder)">
-            </div>
-            <div class="dm-cap">(c) Overall framework </div>
-          </div>
-
-          <div class="dm-card">
-            <div class="dm-figure">
-              <img src="./assets/MIF_01.png" alt="MIF module (placeholder)">
-            </div>
-            <div class="dm-cap">(d) MIF module </div>
-          </div>
-
-          <!-- You can add more cards here -->
-          <!--
-          <div class="dm-card">
-            <div class="dm-figure">
-              <img src="./assets/xxx_distill.png" alt="Distillation (placeholder)">
-            </div>
-            <div class="dm-cap">Distillation (placeholder): <code>./assets/xxx_distill.png</code></div>
-          </div>
-          -->
-        </div>
-
-        <button class="dm-nav right" type="button" aria-label="Scroll right"
-                onclick="dmScrollBy('dm-slider-1', 1)">
-          &#8250;
-        </button>
-      </div>
-
-      <p class="is-size-7 has-text-grey" style="margin-top:0.75rem;">
-        (a) Data acquisition setup and gait collection protocol of the MGD dataset.
-        (c)Overview of the proposed end-to-end multimodal knowledge distillation framework for depression detection under missing-modality settings.
-        (d)Architecture of the Modality Interaction and Fusion Module.
-      </p>
-
-      <!-- Slider JS (put once; safe if you keep only one copy) -->
-      <script>
-        function dmScrollBy(sliderId, direction){
-          const el = document.getElementById(sliderId);
-          if(!el) return;
-          // Scroll roughly by 1 card width (+gap), responsive-friendly
-          const card = el.querySelector('.dm-card');
-          const step = card ? (card.offsetWidth + 16) : 340;
-          el.scrollBy({ left: direction * step, behavior: 'smooth' });
-        }
-      </script>
-    </div>
   </div>
 </section>
 
