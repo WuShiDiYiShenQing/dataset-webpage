@@ -99,13 +99,32 @@
 
           <!-- Teaser -->
           <div class="teaser-img" style="margin-top: 1.25rem;">
-            <!-- Replace with your own teaser later; keeping a placeholder is fine -->
-            <img src="./assets/intro_01.png"
-                 alt="Teaser figure (placeholder)."
-                 style="max-width:60%;height:auto;" />
+            <div class="columns is-mobile is-centered is-vcentered">
+              <div class="column is-half" style="padding: 0.5rem;>
+                <img src="./assets/插图2_02.png" alt="Figure 2" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+              </div>
+              <div class="column is-half" style="padding: 0.5rem;">
+                <img src="./assets/插图2_03.png" alt="Figure 3" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+              </div>
+            </div>
+            
             <p class="is-size-7 has-text-grey" style="margin-top:0.5rem;">
-              Existing RGB+Skeleton methods are highly sensitive to noise from silhouette/skeleton generation. 
-              Our framework leverages RGB, depth, and infrared with trust-driven hierarchical distillation for robust depression recognition under arbitrary modality combinations.
+              The proposed two-stage learning framework for three-lead frontal EEG, including the self-supervised pretraining
+stage and the downstream finetuning stage.
+            </p>
+          </div>
+
+          <div class="paradigm-img" style="margin-top: 2.5rem;">
+            <h3 class="title is-4 has-text-centered">Experimental Paradigm</h3>
+            
+            <div class="columns is-centered">
+              <div class="column is-full" style="padding: 0.5rem;">
+                <img src="./assets/插图5_01.png" alt="Experimental Paradigm" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+              </div>
+            </div>
+            
+            <p class="is-size-7 has-text-grey has-text-centered" style="margin-top:0.5rem;">
+              Figure: The experimental paradigm for the three-lead frontal EEG data collection.
             </p>
           </div>
 
@@ -119,10 +138,8 @@
       <div class="column is-four-fifths">
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
-          <p>Depression poses a major global public health challenge, highlighting the need for early and objective detection. Gait has emerged as a promising non-invasive behavioral indicator, yet existing gait-based approaches are limited by single-modality data and poor robustness to modality absence.
-To address these limitations, we construct a large-scale multi-modal gait dataset for depression recognition, incorporating RGB, depth, and infrared (IR) modalities to exploit their complementary strengths. Building upon this dataset, we propose a unified end-to-end framework that supports arbitrary modality combinations. 
-            The framework integrates a trust-driven hierarchical knowledge distillation strategy, where distillation weights are adaptively guided by the teacher’s learning state, enabling effective knowledge transfer at both modality and fusion levels without multi-stage training.
-Extensive experiments demonstrate the effectiveness and generalization of the proposed dataset and unified framework, establishing a practical and reliable solution for depression recognition under real-world modality-incomplete scenarios. The dataset and code are provided in the supplementary material.</p>
+          <p>In recent years, electroencephalography (EEG)-based auxiliary recognition of mental disorders has gradually become an important research direction. However, most existing methods and datasets are designed for single-disorder settings and are built upon multichannel EEG acquisitions. Meanwhile, the overlap in symptoms and neural representations across different mental disorders makes differential diagnosis in real-world clinical scenarios still highly challenging. To address this issue, we construct a three-lead frontal EEG dataset for differential diagnosis across multiple mental disorders, covering depression, anxiety, schizophrenia, and healthy controls, with all diagnostic labels clinically annotated by professional psychiatrists.
+To more effectively capture both the shared and discriminative representations of multiple mental disorders under a low-channel setting, we further propose a two-stage self-supervised pretraining framework for three-lead frontal EEG. Specifically, the framework includes two key modules: a multi-view channel expansion module inspired by physiological prior knowledge, and a synchronous frequency-band masking module guided by the physiological significance of EEG frequency bands. Extensive experiments demonstrate that our framework consistently outperforms existing baseline methods, highlighting the important reference value of physiological prior knowledge and physiological frequency bands in EEG-based mental disorder recognition. The dataset and all codes for the experiments in this paper have been publicly released on GitHub.</p>
         </div>
       </div>
     </div>
@@ -155,10 +172,43 @@ Extensive experiments demonstrate the effectiveness and generalization of the pr
     <div class="content">
       <!-- Combined text -->
       <!--h3 class="title is-5">Multi-modal Gait Depression (MGD) Dataset</h3-->
-      <p style="text-align: left;">
-        The MGD dataset is collected in an indoor corridor with synchronized ceiling-mounted RGB, infrared (IR), and depth sensors.
-        It contains recordings from <b>597 participants</b> and spans diverse real-world factors such as lighting variability.
+      <h3 class="title is-4 has-text-centered">Dataset Overview</h3>
+      <p style="text-align: justify; margin-bottom: 2rem;">
+        This dataset provides high-quality three-lead frontal EEG (Fp1, Fp2, Fpz) recordings for multi-psychiatric disorder analysis. 
+        It contains recordings from 729 participants and spans diverse clinical settings to ensure robust evaluation.
       </p>
+
+      <div class="columns is-multiline is-centered">
+        
+        <div class="column is-one-third">
+          <figure class="image">
+            <img src="./assets/Sound_Fp1_time_voltage.png" alt="Dataset Example 1" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+          </figure>
+          <p class="has-text-centered is-size-7 has-text-grey" style="margin-top: 0.5rem;">(a) Sound_Fp1_time_voltage</p>
+        </div>
+
+        <div class="column is-one-third">
+          <figure class="image">
+            <img src="./assets/Still_Fp1_time_voltage.png" alt="Dataset Example 2" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+          </figure>
+          <p class="has-text-centered is-size-7 has-text-grey" style="margin-top: 0.5rem;">(b) Still_Fp1_time_voltage</p>
+        </div>
+
+        <div class="column is-one-third">
+          <figure class="image">
+            <img src="./assets/Sound_Fp1_spectrogram.png" alt="Dataset Example 3" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+          </figure>
+          <p class="has-text-centered is-size-7 has-text-grey" style="margin-top: 0.5rem;">(c) Sound_Fp1_spectrogram</p>
+        </div>
+
+        <div class="column is-one-third">
+          <figure class="image">
+            <img src="./assets/fig4.png" alt="Dataset Example 6" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+          </figure>
+          <p class="has-text-centered is-size-7 has-text-grey" style="margin-top: 0.5rem;">(d) The power spectral density of one of the electrodes</p>
+        </div>
+
+      </div>
 
 
       <!-- Slider styles (scoped) -->
