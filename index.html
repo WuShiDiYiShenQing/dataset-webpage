@@ -1210,45 +1210,53 @@
     function triggerPageEnterAnimation(page) {
       if (!page) return;
 
+      const items = page.querySelectorAll(".page-enter-item");
+
+      // 先移除动画类
       page.classList.remove("page-enter");
 
-      const items = page.querySelectorAll(".page-enter-item");
+      // 强制回到初始状态
       items.forEach(item => {
+        item.style.transition = "none";
         item.style.opacity = "0";
-        item.style.transform = "translateY(42px)";
+        item.style.transform = "translateY(50px)";
       });
 
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          page.classList.add("page-enter");
+      // 强制浏览器重排，确保初始状态生效
+      void page.offsetWidth;
 
-          items.forEach(item => {
-            item.style.opacity = "";
-            item.style.transform = "";
-          });
-        });
+      // 恢复 transition
+      items.forEach(item => {
+        item.style.transition = "";
+      });
+
+      // 下一帧再加动画类
+      requestAnimationFrame(() => {
+        page.classList.add("page-enter");
       });
     }
 
     function switchPage(targetId) {
-      let targetPage = null;
+      const currentPage = document.querySelector(".page.active");
+      const targetPage = document.getElementById(targetId);
 
-      pages.forEach(page => {
-        page.classList.remove("active", "page-enter");
-      });
+      if (!targetPage) return;
 
+      // 切换导航高亮
       navLinks.forEach(link => {
         link.classList.toggle("active", link.dataset.pageTarget === targetId);
       });
 
-      targetPage = document.getElementById(targetId);
-      if (targetPage) {
-        targetPage.classList.add("active");
+      // 隐藏所有页面
+      pages.forEach(page => {
+        page.classList.remove("active", "page-enter");
+      });
 
-        requestAnimationFrame(() => {
-          triggerPageEnterAnimation(targetPage);
-        });
-      }
+      // 显示目标页
+      targetPage.classList.add("active");
+
+      // 触发进入动画
+      triggerPageEnterAnimation(targetPage);
 
       window.scrollTo({
         top: 0,
