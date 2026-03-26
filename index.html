@@ -1209,10 +1209,24 @@
 
     function triggerPageEnterAnimation(page) {
       if (!page) return;
+
       page.classList.remove("page-enter");
-      void page.offsetWidth;
+
+      const items = page.querySelectorAll(".page-enter-item");
+      items.forEach(item => {
+        item.style.opacity = "0";
+        item.style.transform = "translateY(42px)";
+      });
+
       requestAnimationFrame(() => {
-        page.classList.add("page-enter");
+        requestAnimationFrame(() => {
+          page.classList.add("page-enter");
+
+          items.forEach(item => {
+            item.style.opacity = "";
+            item.style.transform = "";
+          });
+        });
       });
     }
 
@@ -1220,21 +1234,26 @@
       let targetPage = null;
 
       pages.forEach(page => {
-        const isTarget = page.id === targetId;
-        page.classList.toggle("active", isTarget);
-        if (isTarget) targetPage = page;
+        page.classList.remove("active", "page-enter");
       });
 
       navLinks.forEach(link => {
         link.classList.toggle("active", link.dataset.pageTarget === targetId);
       });
 
+      targetPage = document.getElementById(targetId);
+      if (targetPage) {
+        targetPage.classList.add("active");
+
+        requestAnimationFrame(() => {
+          triggerPageEnterAnimation(targetPage);
+        });
+      }
+
       window.scrollTo({
         top: 0,
         behavior: "smooth"
       });
-
-      triggerPageEnterAnimation(targetPage);
     }
 
     navLinks.forEach(link => {
