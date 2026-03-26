@@ -724,34 +724,6 @@
     /* =========================
       Fade-up animation
     ========================= */
-    .page-enter-item {
-      opacity: 0;
-      transform: translateY(42px);
-      transition: opacity 0.75s ease, transform 0.75s ease;
-      will-change: opacity, transform;
-    }
-
-    .page.page-enter .page-enter-item {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .page.page-enter .page-enter-item:nth-child(1) {
-      transition-delay: 0.05s;
-    }
-
-    .page.page-enter .page-enter-item:nth-child(2) {
-      transition-delay: 0.16s;
-    }
-
-    .page.page-enter .page-enter-item:nth-child(3) {
-      transition-delay: 0.27s;
-    }
-
-    .page.page-enter .page-enter-item:nth-child(4) {
-      transition-delay: 0.38s;
-    }
-
     .fade-up-item {
       opacity: 0;
       transform: translateY(48px);
@@ -1077,7 +1049,7 @@
          ACCESS PAGE
     ========================== -->
     <main class="page" id="accessPage">
-      <section class="section access-wrap page-enter-item">
+      <section class="section access-wrap">
         <div class="container">
           <div class="access-header">
             <h1 class="access-page-title">Access</h1>
@@ -1154,7 +1126,7 @@
          PUBLICATIONS PAGE
     ========================== -->
     <main class="page" id="publicationsPage">
-      <section class="section pub-wrap page-enter-item">
+      <section class="section pub-wrap">
         <div class="container">
           <h2 class="title-lg">Publications</h2>
     
@@ -1207,56 +1179,14 @@
     const logo = document.querySelector(".logo");
     const pages = document.querySelectorAll(".page");
 
-    function triggerPageEnterAnimation(page) {
-      if (!page) return;
-
-      const items = page.querySelectorAll(".page-enter-item");
-
-      // 先移除动画类
-      page.classList.remove("page-enter");
-
-      // 强制回到初始状态
-      items.forEach(item => {
-        item.style.transition = "none";
-        item.style.opacity = "0";
-        item.style.transform = "translateY(50px)";
-      });
-
-      // 强制浏览器重排，确保初始状态生效
-      void page.offsetWidth;
-
-      // 恢复 transition
-      items.forEach(item => {
-        item.style.transition = "";
-      });
-
-      // 下一帧再加动画类
-      requestAnimationFrame(() => {
-        page.classList.add("page-enter");
-      });
-    }
-
     function switchPage(targetId) {
-      const currentPage = document.querySelector(".page.active");
-      const targetPage = document.getElementById(targetId);
+      pages.forEach(page => {
+        page.classList.toggle("active", page.id === targetId);
+      });
 
-      if (!targetPage) return;
-
-      // 切换导航高亮
       navLinks.forEach(link => {
         link.classList.toggle("active", link.dataset.pageTarget === targetId);
       });
-
-      // 隐藏所有页面
-      pages.forEach(page => {
-        page.classList.remove("active", "page-enter");
-      });
-
-      // 显示目标页
-      targetPage.classList.add("active");
-
-      // 触发进入动画
-      triggerPageEnterAnimation(targetPage);
 
       window.scrollTo({
         top: 0,
@@ -1332,9 +1262,6 @@
       if (firstSection) {
         firstSection.classList.add("show");
       }
-
-      const activePage = document.querySelector(".page.active");
-      triggerPageEnterAnimation(activePage);
     });
 
     // =========================
